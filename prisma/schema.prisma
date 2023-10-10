@@ -9,3 +9,18 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Issue {
+  id          Int    @id @default(autoincrement()) @db.UnsignedInt
+  title       String @db.VarChar(255)
+  description String @db.Text
+  status    Status   @default(OPEN)
+  createdAt DateTime @default(now()) @db.Timestamp(0)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamp(0)
+}
+
+enum Status {
+  OPEN
+  IN_PROGRESS
+  CLOSED
+}
