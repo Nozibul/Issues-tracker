@@ -15,7 +15,7 @@ const NavBar = () => {
   ];
 
   return (
-    <nav className="flex space-x-12 ml-6 border-b mb-5 px-5 h-16 items-center">
+    <nav className="flex space-x-12 pl-8 border-b mb-5 px-5 h-16 items-center">
       <Link className="text-3xl text-emerald-700" href="/">
         <BiSolidBugAlt />
       </Link>
