@@ -1,8 +1,13 @@
+import { Button } from "@radix-ui/themes/dist/cjs/components/base-button";
 
 const IssuesPage = () => {
   return (
-    <div>Issues Page</div>
-  )
-}
+    <div>
+      <Button color="cyan" variant="soft">
+        Edit profile
+      </Button>
+    </div>
+  );
+};
 
-export default IssuesPage ;
+export default IssuesPage;

@@ -1,7 +1,9 @@
-import NavBar from "./NavBar";
+import "@radix-ui/themes/styles.css";
 import "./globals.css";
+import NavBar from "./NavBar";
 import { Inter } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
+import { Theme } from "@radix-ui/themes";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +17,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <NextTopLoader color="rgb(5 150 105)" height={3} speed={200} />
-        <NavBar />
-        <main>{children}</main>
+        <Theme>
+          <NavBar />
+          <main>{children}</main>
+        </Theme>
       </body>
     </html>
   );
