@@ -1,10 +1,12 @@
-import { Button } from "@radix-ui/themes/dist/cjs/components/base-button";
+"use client" ;
 
+import { Button } from "@radix-ui/themes";
+import Link from "next/link";
 const IssuesPage = () => {
   return (
     <div>
-      <Button color="cyan" variant="soft">
-        Edit profile
+      <Button>
+        <Link href="/issues/new">New Issue</Link>
       </Button>
     </div>
   );

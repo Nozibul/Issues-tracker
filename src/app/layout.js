@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
         <NextTopLoader color="rgb(5 150 105)" height={3} speed={200} />
         <Theme>
           <NavBar />
-          <main>{children}</main>
+          <main className="p-4">{children}</main>
         </Theme>
       </body>
     </html>
