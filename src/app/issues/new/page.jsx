@@ -8,9 +8,13 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { validationSchema } from "@/app/utils/validationSchema";
+import ErrorMessage from "@/app/components/ErrorMessage";
+import LoadingSpinner from "@/app/components/LoadingSpinner";
 
 const NewIssuePage = () => {
   const router = useRouter();
+  const [error, setError] = useState("");
+  const [ isSubmitting, setIsSubmitting ] = useState(false);
 
   const {
     register,
@@ -19,11 +23,13 @@ const NewIssuePage = () => {
   } = useForm({
     resolver: zodResolver(validationSchema),
   });
-  const [error, setError] = useState("");
+  
 
   // handle form submission
   const onSubmit = async (data) => {
     try {
+      setIsSubmitting(true);
+
       await axios.post("/api/issues", data);
       router.push("/issues");
     } catch (error) {
@@ -31,6 +37,7 @@ const NewIssuePage = () => {
       setTimeout(() => {
         setError("");
       }, 3000);
+      setIsSubmitting(false);
     }
   };
 
@@ -45,17 +52,16 @@ const NewIssuePage = () => {
         <TextField.Root>
           <TextField.Input placeholder="Title" {...register("title")} />
         </TextField.Root>
-        {errors.title && <Text color="red" as="p">{errors.title.message}</Text>}
-        <TextArea
+        <ErrorMessage>{errors.title?.message}</ErrorMessage>        <TextArea
           size="3"
           placeholder="Description…"
           {...register("description")}
         />
-        {errors.description && (
-          <Text color="red" as="p">{errors.description.message}</Text>
-        )} 
+      
+          <ErrorMessage>{errors.description?.message}</ErrorMessage>
+  
 
-        <Button>Submit New Issue</Button>
+        <Button disabled={isSubmitting}>Submit New Issue { isSubmitting && <LoadingSpinner />} </Button>
       </form>
     </div>
   );
