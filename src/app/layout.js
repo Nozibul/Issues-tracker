@@ -22,13 +22,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.variable}>
         <NextTopLoader color="rgb(5 150 105)" height={3} speed={200} />
-        <Theme
-          appearance="light"
-          accentColor="teal"
-          grayColor="mauve"
-          radius="large"
-          scaling="105%"
-        >
+        <Theme accentColor="violet">
           <NavBar />
           <main className="p-4">{children}</main>
           {/* <ThemePanel /> */}
