@@ -1,9 +1,9 @@
 import { Table } from "@radix-ui/themes";
 import { PrismaClient } from "@prisma/client";
 import IssueStatus from "../components/IssueStatus";
-import delay from 'delay';
-import IssueAction from "./IssueAction";
-
+import delay from "delay";
+import IssueActionBtn from "./IssueActionBtn";
+import Link from "next/link";
 
 const IssuesPage = async () => {
   const prisma = new PrismaClient();
@@ -12,13 +12,17 @@ const IssuesPage = async () => {
 
   return (
     <>
-      <IssueAction />
+      <IssueActionBtn />
       <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeaderCell>Issue</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell className="hidden md:table-cell">Status</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell className="hidden md:table-cell">Created</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className="hidden md:table-cell">
+              Status
+            </Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className="hidden md:table-cell">
+              Created
+            </Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
 
@@ -26,13 +30,18 @@ const IssuesPage = async () => {
           {issues?.length > 0
             ? issues.map((issue) => (
                 <Table.Row key={issue.id}>
-                  <Table.Cell>{issue.title}
-                  <div className="block md:hidden"><IssueStatus status={issue.status}/></div>
+                  <Table.Cell>
+                    <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
+                    <div className="block md:hidden">
+                      <IssueStatus status={issue.status} />
+                    </div>
                   </Table.Cell>
                   <Table.Cell className="hidden md:table-cell">
                     <IssueStatus status={issue.status} />
                   </Table.Cell>
-                  <Table.Cell className="hidden md:table-cell">{issue.createdAt.toDateString()}</Table.Cell>
+                  <Table.Cell className="hidden md:table-cell">
+                    {issue.createdAt.toDateString()}
+                  </Table.Cell>
                 </Table.Row>
               ))
             : null}
