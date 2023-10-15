@@ -11,14 +11,17 @@ import { validationSchema } from "@/app/utils/validationSchema";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import LoadingSpinner from "@/app/components/LoadingSpinner";
 
+
 const NewIssuePage = () => {
   const router = useRouter();
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+
   const { register, handleSubmit,formState: { errors } } = useForm({
     resolver: zodResolver(validationSchema),
   });
+
 
   // handle form submission
   const onSubmit = async (data) => {
@@ -34,6 +37,7 @@ const NewIssuePage = () => {
     }
   };
 
+
   return (
     <div className="max-w-xl">
       {error && (
@@ -47,11 +51,7 @@ const NewIssuePage = () => {
           <TextField.Input placeholder="Title" {...register("title")} />
         </TextField.Root>
         <ErrorMessage>{errors.title?.message}</ErrorMessage>{" "}
-        <TextArea
-          size="3"
-          placeholder="Description…"
-          {...register("description")}
-        />
+        <TextArea size="3" placeholder="Description…" {...register("description")} />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button disabled={isSubmitting}>
           Submit New Issue {isSubmitting && <LoadingSpinner />}
