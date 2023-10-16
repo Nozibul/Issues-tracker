@@ -12,10 +12,12 @@ import ErrorMessage from "@/app/components/ErrorMessage";
 import LoadingSpinner from "@/app/components/LoadingSpinner";
 
 
+
 const NewIssuePage = () => {
   const router = useRouter();
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+ 
 
 
   const { register, handleSubmit,formState: { errors } } = useForm({
