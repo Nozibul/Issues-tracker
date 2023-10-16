@@ -1,7 +1,6 @@
-import IssueStatus from "@/app/components/IssueStatus";
+import { IssueStatus} from "@/app/components";
 import { PrismaClient } from "@prisma/client";
 import { Card, Flex, Heading, Text } from "@radix-ui/themes";
-import delay from "delay";
 import { notFound } from "next/navigation";
 
 const IssueDetailsPage = async ({ params }) => {
@@ -12,9 +11,6 @@ const IssueDetailsPage = async ({ params }) => {
 
   if (!issue) return notFound();
 
-  // delay the component render manually
-  await delay(1000);
-  
 
   return (
     <div>
