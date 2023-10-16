@@ -1,7 +1,6 @@
 import { Badge } from "@radix-ui/themes";
 
 
-// 
 const statusMap ={
     OPEN:{ label: "Open", color:"red" },
     IN_PROGRESS:{ label: "In progress", color:"violet" },
