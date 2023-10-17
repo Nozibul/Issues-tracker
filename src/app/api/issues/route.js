@@ -16,7 +16,7 @@ export async function POST(request) {
     const newIssue = await prisma.issue.create({
         data: { title: body.title, description: body.description }
     });
-     console.log(newIssue);
+   
     return NextResponse.json(newIssue, { status: 201});
 
 

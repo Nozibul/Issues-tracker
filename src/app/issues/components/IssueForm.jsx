@@ -28,7 +28,8 @@ const IssueForm = ({issue}) => {
     try {
       setIsSubmitting(true);
 
-      await axios.post("/api/issues", data);
+      if(issue) await axios.patch("/api/issues/" +issue.id, data )
+      else await axios.post("/api/issues", data);
       router.push("/issues");
 
     } catch (error) {
@@ -54,7 +55,7 @@ const IssueForm = ({issue}) => {
         <TextArea size="3" defaultValue={issue?.description} placeholder="Description…" {...register("description")} />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button disabled={isSubmitting}>
-          Submit New Issue {isSubmitting && <LoadingSpinner />}
+          { issue ?"Update Issue" : "Submit New Issue" } {isSubmitting && <LoadingSpinner />}
         </Button>
       </form>
     </div>
