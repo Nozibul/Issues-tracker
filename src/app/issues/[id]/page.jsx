@@ -1,12 +1,12 @@
-import { Box, Grid } from "@radix-ui/themes";
+import { Box, Grid, Flex } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import EditIssueButton from "./EditIssueButton";
 import IssueDetails from "./IssueDetails";
 import prisma from "../../../../prisma/client";
+import DeleteIssueButton from "./DeleteIssueButton";
 
 
 const IssueDetailsPage = async ({ params }) => {
-
   const issue = await prisma.issue.findUnique({
     where: { id: parseInt(params.id) },
   });
@@ -14,12 +14,15 @@ const IssueDetailsPage = async ({ params }) => {
   if (!issue) return notFound();
 
   return (
-    <Grid columns={{ initial: "1", md:"2" }} gap="4">
-      <Box className="max-w-xl">
-       <IssueDetails issues={issue} />
+    <Grid columns={{ initial: "1", sm: "5" }} gap="4">
+      <Box className="md:col-span-4">
+        <IssueDetails issues={issue} />
       </Box>
-      <Box>
-      <EditIssueButton issueId={issue.id} />
+      <Box className="w-4/5">
+        <Flex direction="column" gap="4">
+          <EditIssueButton issueId={issue.id} />
+          <DeleteIssueButton issueId={issue.id} />
+        </Flex>
       </Box>
     </Grid>
   );

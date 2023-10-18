@@ -1,15 +1,15 @@
 import "@radix-ui/themes/styles.css";
-import './theme-config.css';
+import "./theme-config.css";
 import "./globals.css";
 import NavBar from "./NavBar";
-import { Inter } from 'next/font/google';
+import { Inter } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
-import { Theme, ThemePanel } from "@radix-ui/themes";
+import { Container, Theme, ThemePanel } from "@radix-ui/themes";
 
-const inter = Inter({ 
-  subsets: ["latin"] ,
-  display: 'swap',
-  variable: '--font-inter',
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
 });
 
 export const metadata = {
@@ -24,7 +24,9 @@ export default function RootLayout({ children }) {
         <NextTopLoader color="rgb(5 150 105)" height={3} speed={200} />
         <Theme accentColor="violet">
           <NavBar />
-          <main className="p-4">{children}</main>
+          <main className="p-4">
+            <Container>{children}</Container>
+          </main>
           {/* <ThemePanel /> */}
         </Theme>
       </body>

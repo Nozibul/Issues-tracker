@@ -10,7 +10,7 @@ const IssueDetails = ({issues}) => {
         <IssueStatus status={status} />
         <Text>{createdAt.toDateString()}</Text>
       </Flex>
-      <Card className="mt-4 ">
+      <Card className="mt-4 w-4/5">
         <p>{description}</p>
       </Card>
     </>
