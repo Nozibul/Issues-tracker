@@ -1,14 +1,14 @@
-import { PrismaClient } from "@prisma/client";
 import { Table } from "@radix-ui/themes";
 import { IssueStatus, Link,  } from "@/app/components";
 import IssueActionBtn from "./IssueActionBtn";
+import prisma from "../../../prisma/client";
+
+
 
 
 const IssuesPage = async () => {
-  const prisma = new PrismaClient();
   const issues = await prisma.issue.findMany();
  
-
   return (
     <>
       <IssueActionBtn />
@@ -49,5 +49,8 @@ const IssuesPage = async () => {
     </>
   );
 };
+
+// export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default IssuesPage;

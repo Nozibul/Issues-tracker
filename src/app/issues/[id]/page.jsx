@@ -1,12 +1,12 @@
-import { PrismaClient } from "@prisma/client";
 import { Box, Grid } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import EditIssueButton from "./EditIssueButton";
 import IssueDetails from "./IssueDetails";
+import prisma from "../../../../prisma/client";
 
 
 const IssueDetailsPage = async ({ params }) => {
-  const prisma = new PrismaClient();
+
   const issue = await prisma.issue.findUnique({
     where: { id: parseInt(params.id) },
   });

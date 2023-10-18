@@ -1,14 +1,13 @@
 import { validationSchema } from "@/app/utils/validationSchema";
-import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
+import prisma from "../../../../../prisma/client";
+
 
 export async function PATCH(request, { params }) {
-    const prisma = new PrismaClient();
   
     try {
       //get edit data
       const body = await request.json();
-      console.log(body)
       const validation = validationSchema.safeParse(body);
   
       // validate the issue data
@@ -19,8 +18,8 @@ export async function PATCH(request, { params }) {
       const issueId = await prisma.issue.findUnique({
         where: { id: parseInt(params.id) }
       });
-      console.log("Id",issueId.id)
-    //   if(!issue) return NextResponse.json({ error: "Invalid Issue"}, { status: 404 })
+    
+      if(!issueId) return NextResponse.json({ error: "Invalid Issue"}, { status: 404 })
 
 
       // update the edit data from unique id
@@ -31,8 +30,6 @@ export async function PATCH(request, { params }) {
             description: body.description
         }
       })
-      console.log(issueId.id)
-      console.log("Update Issue",updatedIssue);
       return NextResponse.json(updatedIssue);
   
   
