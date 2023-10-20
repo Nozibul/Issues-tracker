@@ -4,8 +4,6 @@ import IssueActionBtn from "./IssueActionBtn";
 import prisma from "../../../prisma/client";
 
 
-
-
 const IssuesPage = async () => {
   const issues = await prisma.issue.findMany();
  

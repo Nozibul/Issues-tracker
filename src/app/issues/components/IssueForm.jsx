@@ -10,13 +10,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 
-
 const IssueForm = ({issue}) => {
   const router = useRouter();
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
  
-
 
   const { register, handleSubmit,formState: { errors } } = useForm({
     resolver: zodResolver(validationSchema),
