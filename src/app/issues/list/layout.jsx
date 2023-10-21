@@ -1,6 +1,6 @@
 
 export const metadata = {
-    title: "Issue",
+    title: "Issue list",
     description: "Issue Tracker scalable web application",
   };
 
