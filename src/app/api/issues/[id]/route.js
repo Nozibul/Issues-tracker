@@ -1,9 +1,14 @@
 import { validationSchema } from "@/app/utils/validationSchema";
 import { NextResponse } from "next/server";
 import prisma from "../../../../../prisma/client";
+import { getServerSession } from "next-auth";
+import authOptions from "@/app/auth/authOptions";
 
 // Edit the Issue
 export async function PATCH(request, { params }) {
+  const session = await getServerSession(authOptions);
+  if (!session) return NextResponse.json({}, { status: 401 });
+
   try {
     //get edit data
     const body = await request.json();
@@ -36,23 +41,25 @@ export async function PATCH(request, { params }) {
   }
 }
 
-
 // Delete the Issue
-export async function DELETE( request ,{ params }) {
+export async function DELETE(request, { params }) {
+  const session = await getServerSession(authOptions);
+  if (!session) return NextResponse.json({}, { status: 401 });
 
   try {
     // find the unique id
     const issueId = await prisma.issue.findUnique({
-      where: { id: parseInt(params.id) }
+      where: { id: parseInt(params.id) },
     });
-  
-    if (!issueId) return NextResponse.json({ error: "Invalid issue" }, { status: 404 });
-  
+
+    if (!issueId)
+      return NextResponse.json({ error: "Invalid issue" }, { status: 404 });
+
     await prisma.issue.delete({
       where: { id: issueId.id },
     });
-  
-    return NextResponse.json({});// Response for a successful deletion
+
+    return NextResponse.json({}); // Response for a successful deletion
   } catch (error) {
     console.log(error);
     return NextResponse.json({ status: "Fail" }, { status: 500 }); // Error response
