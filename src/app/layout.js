@@ -1,10 +1,12 @@
+import { Container, Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
-import "./theme-config.css";
-import "./globals.css";
-import NavBar from "./NavBar";
 import { Inter } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
-import { Container, Theme, ThemePanel } from "@radix-ui/themes";
+import NavBar from "./NavBar";
+import AuthProvider from "./auth/AuthProvider";
+import "./globals.css";
+import "./theme-config.css";
+
 
 const inter = Inter({
   subsets: ["latin"],
@@ -21,14 +23,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.variable}>
-        <NextTopLoader color="rgb(5 150 105)" height={3} speed={200} />
-        <Theme accentColor="violet">
-          <NavBar />
-          <main className="p-4">
-            <Container>{children}</Container>
-          </main>
-          {/* <ThemePanel /> */}
-        </Theme>
+        <AuthProvider>
+          <NextTopLoader color="rgb(5 150 105)" height={3} speed={200} />
+          <Theme accentColor="violet">
+            <NavBar />
+            <main className="p-4">
+              <Container>{children}</Container>
+            </main>
+            {/* <ThemePanel /> */}
+          </Theme>
+        </AuthProvider>
       </body>
     </html>
   );
