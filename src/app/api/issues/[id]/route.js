@@ -6,8 +6,8 @@ import authOptions from "@/app/auth/authOptions";
 
 // Edit the Issue
 export async function PATCH(request, { params }) {
-  const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({}, { status: 401 });
+  // const session = await getServerSession(authOptions);
+  // if (!session) return NextResponse.json({}, { status: 401 });
 
   try {
     //get edit data
